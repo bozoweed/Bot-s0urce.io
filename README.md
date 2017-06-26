@@ -25,4 +25,4 @@ The main file (`main.js`) contains several values you may want to change.
 * Paste in the full contents of `main.js`
 * Type `app.start()` to start the automated bot
 * If you need to stop, you can type `app.stop()`
-* For auto Update your firewall you juste nned to select one (A, B or C ) after that the bot switch and upgrade all firewall alone
+* For auto Update your firewall you juste need to select one (A, B or C ) after that the bot switch and upgrade all firewall alone
