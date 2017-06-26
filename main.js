@@ -94,13 +94,13 @@ app = {
 		}
 		$("#window-other-port2").click();
 		// handle upgrades
-		//app.loops.upgrade();
+		app.loops.upgrade();
 		// start the loop that does the guessing
 		wordLoop = setInterval(app.loops.word, wordFreq);
 		// start the loop for btc monitoring
 		minerLoop = setInterval(app.loops.miner, mineFreq);
 		// start the loop for upgrades
-		upgradeLoop = setInterval(app.loops.upgrade, upgradeFreq);
+		//upgradeLoop = setInterval(app.loops.upgrade, upgradeFreq);
 	},
 
 	loops: {
