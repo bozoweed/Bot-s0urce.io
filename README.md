@@ -21,8 +21,12 @@ The main file (`main.js`) contains several values you may want to change.
 > Note 2: My bot work with all web browser , you can help me to make work better :)
 
 * Go to [http://s0urce.io/](s0urce.io) and start a game.
-* Open the Console (Under View -> Developer -> JavaScript Console)
+* Open the Console (Under View -> Developer -> JavaScript Console) (pr;PNG)
 * Paste in the full contents of `main.js`
 * Type `app.start()` to start the automated bot
 * If you need to stop, you can type `app.stop()`
 * For auto Update your firewall you juste need to select one (A, B or C ) after that the bot switch and upgrade all firewall alone
+
+## ENJOY
+
+(2.PNG)
