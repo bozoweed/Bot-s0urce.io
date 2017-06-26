@@ -9,7 +9,8 @@ The main file (`main.js`) contains several values you may want to change.
 * `db` - The path to the training JSON
 * `message` - The message you send to people after you hack them
 * `wordFreq` - How often to guess words.  If you guess too fast, you'll be booted from the game and your progress will no longer update.
-* `mineFreq` - How often to purchase upgrades
+* `mineFreq` - How often to purchase upgrades for BT miner.
+* `upgradeFreq` - How often to purchase upgrades for Firewall.
 * `minerLevel` - How high you get your miners to before moving to the next level up.
 * `playerToAttack` - The index of the player you want to attack, 0 is the first in the list
 
@@ -24,4 +25,3 @@ The main file (`main.js`) contains several values you may want to change.
 * Paste in the full contents of `main.js`
 * Type `app.start()` to start the automated bot
 * If you need to stop, you can type `app.stop()`
-* For auto Update your firewall you juste nned to select one (A, B or C ) after that the bot switch and upgrade all firewall alone
