@@ -10,7 +10,7 @@ The main file (`main.js`) contains several values you may want to change.
 * `message` - The message you send to people after you hack them
 * `wordFreq` - How often to guess words.  If you guess too fast, you'll be booted from the game and your progress will no longer update.
 * `mineFreq` - How often to purchase upgrades for BT miner.
-* `upgradeFreq` - How often to purchase upgrades for Firewall.
+* `upgradeFreq` - How often to purchase upgrades for Firewall. ( Not work for now need to work on it )
 * `minerLevel` - How high you get your miners to before moving to the next level up.
 * `playerToAttack` - The index of the player you want to attack, 0 is the first in the list
 
