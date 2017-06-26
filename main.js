@@ -42,12 +42,12 @@ let maxStats = {
 const firewalls = ["1", "2", "3"];
 const ocrApiKey = "XXX";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
-let message = "papa bless, one love ";
+let message = "We Are Anonymous, Expect us !!";
 let wordFreq = 1250;
 let mineFreq = 3000;
 let blockFreq = 5000;
-let upgradeFreq = 7500;
-let minerLevel = 20;
+let upgradeFreq = 4000;
+let minerLevel = 1000;
 let playerToAttack = 0;
 
 app = {
@@ -100,7 +100,7 @@ app = {
 		// start the loop for btc monitoring
 		minerLoop = setInterval(app.loops.miner, mineFreq);
 		// start the loop for upgrades
-		//upgradeLoop = setInterval(app.loops.upgrade, upgradeFreq);
+		upgradeLoop = setInterval(app.loops.upgrade, upgradeFreq);
 	},
 
 	loops: {
