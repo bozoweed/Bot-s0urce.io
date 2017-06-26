@@ -43,7 +43,7 @@ const firewalls = ["1", "2", "3"];
 const ocrApiKey = "XXX";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
 let message = "We Are Anonymous, Expect Us !";
-let wordFreq = Math.floor((Math.random() * 400) + 1000);
+let wordFreq = Math.floor((Math.random() * 150) + 1250);
 let mineFreq = 3000;
 let blockFreq = 5000;
 let upgradeFreq = 5000;
@@ -95,7 +95,7 @@ app = {
 		$("#window-other-port2").click();
 		// handle upgrades
 		app.loops.upgrade();
-		wordFreq = Math.floor((Math.random() * 400) + 1000);
+		wordFreq = Math.floor((Math.random() * 150) + 1250);
 		// start the loop that does the guessing
 		wordLoop = setInterval(app.loops.word, wordFreq);
 		// start the loop for btc monitoring
