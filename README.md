@@ -15,7 +15,9 @@ The main file (`main.js`) contains several values you may want to change.
 
 ## How To Use
 
-> Note: It's recommended that you use Google Chrome
+> Note: This bot is my update of an other one in git but his dev don't know what he do
+
+> Note 2: My bot work with all web browser , you can help me to make work better :)
 
 * Go to [http://s0urce.io/](s0urce.io) and start a game.
 * Open the Console (Under View -> Developer -> JavaScript Console)
