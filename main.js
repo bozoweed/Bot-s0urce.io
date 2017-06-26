@@ -46,7 +46,7 @@ let message = "We Are Anonymous, Expect Us !";
 let wordFreq = 1250;
 let mineFreq = 3000;
 let blockFreq = 5000;
-let upgradeFreq = 3000;
+let upgradeFreq = 5000;
 let minerLevel = 1000;
 let playerToAttack = 0;
 
