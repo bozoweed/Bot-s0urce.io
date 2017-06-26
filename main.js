@@ -230,7 +230,8 @@ app = {
 
 	go: () => {
 		const wordLink = $(".tool-type-img").prop("src");
-		if (wordLink !== "http://www.s0urce.io/client/img/words/template.png" || wordLink !== "http://s0urce.io/client/img/words/template.png" ) {
+		if ( wordLink !== "http://s0urce.io/client/img/words/template.png" ) {
+		if (wordLink !== "http://www.s0urce.io/client/img/words/template.png" ) {
 			if (listing.hasOwnProperty(wordLink) === true) {
 				const word = listing[wordLink];
 				log(`. Found word: [${word}]`);
@@ -241,6 +242,11 @@ app = {
 			log(`.[${listing[wordLink]}]`);
 			log("* Not seen, trying OCR...");
 			app.ocr(wordLink);
+		}
+		else {
+			log("* Can't find the word link...");
+			app.restart();	
+		}
 		}
 		else {
 			log("* Can't find the word link...");
