@@ -20,7 +20,7 @@ The main file (`main.js`) contains several values you may want to change.
 
 > Note 2: My bot work with all web browser , you can help me to make work better :)
 
-* Go to [http://s0urce.io/](s0urce.io) and start a game.
+* Go to [http://s0urce.io/](http://s0urce.io/) and start a game.
 * Open the Console (Under View -> Developer -> JavaScript Console) ![find console.](pr.PNG)
 * Paste in the full contents of `main.js`
 * Type `app.start()` to start the automated bot
