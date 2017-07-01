@@ -326,7 +326,7 @@ app = {
 			if (listing.hasOwnProperty(wordLink) === true) {
 				const word = listing[wordLink];
 				log(`. Found word: [${word}]`);
-				log(`. Freq: [${wordFreqmod}]`);
+				log(`. Freq: [${wordFreq}]`);
 				app.submit(word);
 				return;
 			}
