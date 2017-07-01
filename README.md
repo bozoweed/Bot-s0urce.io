@@ -8,7 +8,7 @@ The main file (`main.js`) contains several values you may want to change.
 * `ocrApiKey` - The key for the ocr.space API (it's free)
 * `db` - The path to the training JSON
 * `message` - The message you send to people after you hack them
-* `wordFreq` - How often to guess words.  If you guess too fast, you'll be booted from the game and your progress will no longer update. ( change at line 45 and 98 )
+* `wordFreqmod` - How often to guess words.  If you guess too fast, you'll be booted from the game and your progress will no longer update. ( change at line 45 and 98 )
 * `mineFreq` - How often to purchase upgrades for BT miner.
 * `upgradeFreq` - How often to purchase upgrades for Firewall. ( Not work for now need to work on it )
 * `minerLevel` - How high you get your miners to before moving to the next level up.
@@ -23,9 +23,11 @@ The main file (`main.js`) contains several values you may want to change.
 * Go to [http://s0urce.io/](http://s0urce.io/) and start a game.
 * Open the Console (Under View -> Developer -> JavaScript Console) ![find console.](pr.PNG)
 * Paste in the full contents of `main.js`
+* Select Firewall (A)
 * Type `app.start()` to start the automated bot
-* If you need to stop, you can type `app.stop()`
-* For auto Update your firewall you juste need to select one (A, B or C ) after that the bot switch and upgrade all firewall alone
+* If you need to stop, you can make that with gui
+* You can restart if is buged with the gui
+* You can change in real time the hack speed ( change the first only , with double click )
 
 ## ENJOY
 
