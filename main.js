@@ -55,6 +55,7 @@ let mineFreq = 3000;
 let blockFreq = 5000;
 let upgradeFreq = 5000;
 let minerLevel = 1000;
+let defFreq = 1000;
 let playerToAttack = 0;
 
 app = {
@@ -106,6 +107,8 @@ app = {
 		$("#window-other-port1").click();
 		// handle upgrades
 		app.loops.upgrade();
+		// start def loop
+		defLoop = setInterval(app.loops.defCharge(), defFreq);
 		wordFreq = Math.floor((Math.random() * wordFreqmod) + 1250);
 		// start the loop that does the guessing
 		wordLoop = setInterval(app.loops.word, wordFreq);
@@ -238,6 +241,42 @@ app = {
 				}
 			}
 		},
+		defCharge: () => {
+		 log('checking charges')
+    			 let chargesA = document.querySelector('.firewall-part1-charges')
+   			 let chargesB = document.querySelector('.firewall-part2-charges')
+    			 let chargesC = document.querySelector('.firewall-part3-charges')
+   			 let availabilityA = chargesA.style.opacity
+   			 let availabilityB = chargesA.style.opacity
+  			 let availabilityC = chargesA.style.opacity
+   			 let maxA = document.querySelector('.firewall-part1-charges-max').innerText
+    			 let maxB = document.querySelector('.firewall-part2-charges-max').innerText
+   			 let maxC = document.querySelector('.firewall-part3-charges-max').innerText
+  			 let firewalls = document.querySelectorAll('.window-firewall-letter')
+
+   		 if (maxA - 5 > chargesA.innerText && availabilityA == 1) {
+    			    firewalls[0].click()
+        		document.querySelector('#shop-firewall-charge5').click()
+        		document.querySelector('#window-firewall-pagebutton').click()
+      		  log('Charges+5 on Port A')
+			return; 
+   		 }
+			    if (maxB -5 > chargesB.innerText && availabilityB == 1) {
+      			  firewalls[1].click()
+     			   document.querySelector('#shop-firewall-charge5').click()
+    			    document.querySelector('#window-firewall-pagebutton').click()
+  			      log('Charges+5 on Port B')
+				    return;
+   			 }
+  			if (maxC - 5 > chargesC.innerText && availabilityC == 1) {
+   			     firewalls[2].click()
+    			    document.querySelector('#shop-firewall-charge5').click()
+    			    document.querySelector('#window-firewall-pagebutton').click()
+    			    log('Charges+5 on Port C')
+				return;
+			}
+			return;
+		},
 		upgrade: () => {
 			myBT = parseInt($("#window-my-coinamount").text());
 			// if the back button is visible, we're on a page, let's back out
@@ -297,9 +336,11 @@ app = {
 		app.stop();
 		app.automate();
 	},
+	
+	
 
 	stop: () => {
-		if (wordLoop === null && minerLoop === null && upgradeLoop === null) {
+		if (wordLoop === null && minerLoop === null && upgradeLoop === null && defLoop === null) {
 			log("! No loops to stop");
 			return;
 		}
@@ -312,6 +353,8 @@ app = {
 		minerLoop = null;
 		clearInterval(upgradeLoop);
 		upgradeLoop = null;
+		clearItnerval(defLoop);
+		defLoop = null;
 		log("* Stopped loops");
 	},
 
