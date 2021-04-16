@@ -49,7 +49,7 @@ const firewalls = ["1", "2", "3"];
 const ocrApiKey = "XXX";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
 let message = "We Are Anonymous, Expect Us !";
-let wordFreqMin = 500
+let wordFreqMin = 550
 let wordFreqMax = 600
 let wordFreq = 0;
 let mineFreq = 3000;
@@ -86,8 +86,7 @@ app = {
 		}
 		if ($("#window-computer").is(":visible") === false) {
 			log("* My computer must be open");
-			$("#desktop-computer").children("img").click();			
-			$(`#window-firewall-part1`).click();
+			$("#desktop-computer").children("img").click();		
 		}
 		if ($("#window-bot").is(":visible") === false) {
 			log("* Opening bot window");
