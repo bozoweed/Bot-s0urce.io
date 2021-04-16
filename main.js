@@ -54,8 +54,10 @@ let wordFreqMax = 800
 let wordFreq = 0;
 let mineFreq = 3000;
 let blockFreq = 1000;
-let upgradeFreq = 1000;
-let minerLevel = 1000;
+let upgradeFreq = 5000;
+let minerLevel = 5000;
+
+let lastFirewallUpdated=0;
 
 let playerToAttack = 0;
 
@@ -108,7 +110,7 @@ app = {
 		}
 		$("#window-other-port"+TargetFirewall).click();
 		// handle upgrades
-		app.loops.upgrade();
+		//app.loops.upgrade();
 		
 		
 		wordFreq = app.getRandomArbitrary(wordFreqMin, wordFreqMax);
@@ -117,7 +119,7 @@ app = {
 		// start the loop for btc monitoring
 		minerLoop = setInterval(app.loops.miner, mineFreq);
 		// start the loop for upgrades
-		//upgradeLoop = setInterval(app.loops.upgrade, upgradeFreq);
+		upgradeLoop = setInterval(app.loops.upgrade, upgradeFreq);
 	},
 	
 	getFirewall: ()=>{
@@ -127,6 +129,13 @@ app = {
 
 	getRandomArbitrary: (min, max)=>{
 		return Math.round(Math.random() * (max - min) + min);
+	},
+	getFirewallToUpdate(){
+		if(lastFirewallUpdated > firewalls.length-1)
+			lastFirewallUpdated=0
+			let firewall = firewalls[lastFirewallUpdated]
+			lastFirewallUpdated++
+		return firewall
 	},
 	gui: () => {
 		 //check if bot window has been appended already
@@ -154,6 +163,7 @@ app = {
                     "<div class='window-content' style='width:" + windowWidth + ";height:"+windowHeight + "'>" + 
                         "<div id='restart-button' class='button' style='display: block; margin-bottom: 15px'>Restart Bot</div>" +
                         "<div id='stop-button' class='button' style='display: block; margin-bottom: 15px'>Stop Bot</div>" +
+                        "<div id='start-button' class='button' style='display: block; margin-bottom: 15px'>Start Bot</div>" +
 						"<span style='font-size:18px'>Hack speed Mini:" +
 							"<input type='text' id='hack-speed-input-min' class='input-form' onkeypress='return event.charCode >= 48 && event.charCode <= 57' style='width:50px;margin:0px 0px 0px 2px' value=" + wordFreqMin +">"
 						+"</span>"
@@ -161,7 +171,7 @@ app = {
 						+"<span style='font-size:18px'>Hack speed Maxi:" +
 						"<input type='text' id='hack-speed-input-max' class='input-form' onkeypress='return event.charCode >= 48 && event.charCode <= 57' style='width:50px;margin:0px 0px 0px 2px' value=" + wordFreqMax +">"
 						+"</span>"+
-                        "<div id='github-button' class='button' style='display: block; margin-top: 50%'>This script is on Github!</div>" +
+                        "<div id='github-button' class='button' style='display: block; margin-top: 30%'>This script is on Github!</div>" +
                     "</div>" +
                 "</div>" +
             "</div>";
@@ -181,16 +191,20 @@ app = {
                 app.stop();
             });
 
+			$("#start-button").on("click", () => {
+                app.automate();
+            });
+
             $("#github-button").on("click", () => {
                 window.open("https://github.com/bozoweed/Bot-s0urce.io")
             });
 			
 			$("#hack-speed-input-min").change(() => {
-				wordFreqMin = $("#hack-speed-input-min").val();
+				setTimeout(()=>wordFreqMin = parseInt($("#hack-speed-input-min").val()), 1000)				
 			});
 
 			$("#hack-speed-input-max").change(() => {
-				wordFreqMax = $("#hack-speed-input-max").val();
+				setTimeout(()=>wordFreqMin = parseInt($("#hack-speed-input-min").val()), 1000)	
 			});
             //make the bot window draggable
             botWindow = ("#window-bot");
@@ -213,7 +227,6 @@ app = {
             });
         }
 },
-
 	loops: {
 		word: () => {
 			if (block === true) {
@@ -259,17 +272,16 @@ app = {
 			}
 		},
 		upgrade: () => {
+			// select the firewall
+			const firewall = app.getFirewallToUpdate()
+			log(`. Handling upgrades to firewall ${firewall}`);
+			$(`#window-firewall-part`+firewall).click();
+
 			myBT = parseInt($("#window-my-coinamount").text());
 			// if the back button is visible, we're on a page, let's back out
-			if ($("#window-firewall-pagebutton").is(":visible") === true) {
+			/*if ($("#window-firewall-pagebutton").is(":visible") === true) {
 				$("#window-firewall-pagebutton").click();
-			}
-			// take it off the top
-			const firewall = firewalls.shift()
-			firewalls.push(firewall);
-			// select the firewall
-			log(`. Handling upgrades to firewall ${firewall}`);
-			$(`#window-firewall-part${firewall}`).click();
+			}*/
 			// get stats
 			const stats = {
 				charge: parseInt($("#shop-max-charges").text()),
@@ -281,9 +293,9 @@ app = {
 				log(". Strength isn't maxed");
 				const strengthPrice = parseInt($("#shop-firewall-difficulty-value").text());
 				if (strengthPrice < myBT) {
+					myBT-=strengthPrice
 					log(". Buying strength");
 					$("#shop-firewall-difficulty").click();
-					return;
 				}
 			}
 			// check max charges
@@ -291,9 +303,9 @@ app = {
 				log(". Charge isn't maxed");
 				const chargePrice = parseInt($("#shop-firewall-max_charge10-value").text());
 				if (chargePrice < myBT) {
+					myBT-=chargePrice
 					$("#shop-firewall-max_charge10").click();
 					log(". Buying charge");
-					return;
 				}
 			}
 			// check regen
@@ -301,9 +313,9 @@ app = {
 				log(". Regen isn't maxed");
 				const regenPrice = parseInt($("#shop-firewall-regen-value").text());
 				if (regenPrice < myBT) {
+					myBT-=regenPrice
 					$("#shop-firewall-regen").click();
 					log(". Buying regen");
-					return;
 				}
 			}
 			// nothing matched, let's go back
