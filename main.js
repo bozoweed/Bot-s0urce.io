@@ -50,11 +50,11 @@ const ocrApiKey = "XXX";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
 let message = "We Are Anonymous, Expect Us !";
 let wordFreqMin = 600
-let wordFreqMax = 650
+let wordFreqMax = 700
 let wordFreq = 0;
 let mineFreq = 3000;
 let blockFreq = 1000;
-let upgradeFreq = 5000;
+let upgradeFreq = 1000;
 let minerLevel = 5000;
 
 let lastFirewallUpdated=0;
