@@ -49,8 +49,8 @@ const firewalls = ["1", "2", "3"];
 const ocrApiKey = "XXX";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
 let message = "We Are Anonymous, Expect Us !";
-let wordFreqMin = 550
-let wordFreqMax = 600
+let wordFreqMin = 600
+let wordFreqMax = 650
 let wordFreq = 0;
 let mineFreq = 3000;
 let blockFreq = 1000;
@@ -296,6 +296,16 @@ app = {
 					myBT-=strengthPrice
 					log(". Buying strength");
 					$("#shop-firewall-difficulty").click();
+				}
+			}			
+			// check max charges
+			if (stats.charge < maxStats.charge) {
+				log(". Charge isn't maxed");
+				const chargePrice = parseInt($("#shop-firewall-max_charge10-value").text());
+				if (chargePrice < myBT) {
+					myBT-=chargePrice
+					$("#shop-firewall-max_charge10").click();
+					log(". Buying charge");
 				}
 			}
 			// check regen
