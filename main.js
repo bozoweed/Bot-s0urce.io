@@ -97,7 +97,7 @@ app = {
 		$("#player-list").children("tr").eq(playerToAttack)[0].click();
 		$("#window-other-button").click();
 		// do a check for money
-		const portStyle = $(`#window-other-port${firewalls[0]}`).attr("style");
+		const portStyle = $(`#window-other-port${app.getFirewall()}`).attr("style");
 		if (portStyle.indexOf("opacity: 1") === -1) {
 			// this port costs too much, let's wait a bit
 			log("* Hack too expensive, waiting");
@@ -118,6 +118,14 @@ app = {
 		//upgradeLoop = setInterval(app.loops.upgrade, upgradeFreq);
 	},
 	
+	getFirewall: ()=>{
+		let select = app.getRandomArbitrary(0, firewalls.length-1)
+		return firewalls[select]
+	},
+
+	getRandomArbitrary: (min, max)=>{
+		return Math.round(Math.random() * (max - min) + min);
+	},
 	gui: () => {
 		 //check if bot window has been appended already
         if ($("#window-bot").length > 0) {
