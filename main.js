@@ -49,11 +49,12 @@ const firewalls = ["1", "2", "3"];
 const ocrApiKey = "XXX";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
 let message = "We Are Anonymous, Expect Us !";
-let wordFreqmod = 400
-let wordFreq = Math.floor((Math.random() * wordFreqmod) + 1250);
+let wordFreqMin = 600
+let wordFreqMax = 800
+let wordFreq = 0;
 let mineFreq = 3000;
-let blockFreq = 5000;
-let upgradeFreq = 5000;
+let blockFreq = 1000;
+let upgradeFreq = 1000;
 let minerLevel = 1000;
 
 let playerToAttack = 0;
@@ -110,7 +111,7 @@ app = {
 		app.loops.upgrade();
 		
 		
-		wordFreq = Math.floor((Math.random() * wordFreqmod) + 1250);
+		wordFreq = app.getRandomArbitrary(wordFreqMin, wordFreqMax);
 		// start the loop that does the guessing
 		wordLoop = setInterval(app.loops.word, wordFreq);
 		// start the loop for btc monitoring
@@ -153,10 +154,13 @@ app = {
                     "<div class='window-content' style='width:" + windowWidth + ";height:"+windowHeight + "'>" + 
                         "<div id='restart-button' class='button' style='display: block; margin-bottom: 15px'>Restart Bot</div>" +
                         "<div id='stop-button' class='button' style='display: block; margin-bottom: 15px'>Stop Bot</div>" +
-						"<span style='font-size:18px'>Hack speed:" +
-							"<input type='text' id='hack-speed-input' class='input-form' onkeypress='return event.charCode >= 48 && event.charCode <= 57' style='width:50px;margin:0px 0px 0px 2px' value=" + wordFreqmod +
-							"><span>+ 1250(ms)</span>" +
-						"</span>" +
+						"<span style='font-size:18px'>Hack speed Mini:" +
+							"<input type='text' id='hack-speed-input-min' class='input-form' onkeypress='return event.charCode >= 48 && event.charCode <= 57' style='width:50px;margin:0px 0px 0px 2px' value=" + wordFreqMin +">"
+						+"</span>"
+						+"<br>"
+						+"<span style='font-size:18px'>Hack speed Maxi:" +
+						"<input type='text' id='hack-speed-input-max' class='input-form' onkeypress='return event.charCode >= 48 && event.charCode <= 57' style='width:50px;margin:0px 0px 0px 2px' value=" + wordFreqMax +">"
+						+"</span>"+
                         "<div id='github-button' class='button' style='display: block; margin-top: 50%'>This script is on Github!</div>" +
                     "</div>" +
                 "</div>" +
@@ -181,8 +185,12 @@ app = {
                 window.open("https://github.com/bozoweed/Bot-s0urce.io")
             });
 			
-			$("#hack-speed-input").change(() => {
-				wordFreqmod = $("#hack-speed-input").val();
+			$("#hack-speed-input-min").change(() => {
+				wordFreqMin = $("#hack-speed-input-min").val();
+			});
+
+			$("#hack-speed-input-max").change(() => {
+				wordFreqMax = $("#hack-speed-input-max").val();
 			});
             //make the bot window draggable
             botWindow = ("#window-bot");
