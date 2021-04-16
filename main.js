@@ -97,14 +97,15 @@ app = {
 		$("#player-list").children("tr").eq(playerToAttack)[0].click();
 		$("#window-other-button").click();
 		// do a check for money
-		const portStyle = $(`#window-other-port${app.getFirewall()}`).attr("style");
+		let TargetFirewall = app.getFirewall()
+		const portStyle = $(`#window-other-port${TargetFirewall}`).attr("style");
 		if (portStyle.indexOf("opacity: 1") === -1) {
 			// this port costs too much, let's wait a bit
 			log("* Hack too expensive, waiting");
 			setTimeout(app.automate, blockFreq);
 			return;
 		}
-		$("#window-other-port1").click();
+		$("#window-other-port"+TargetFirewall).click();
 		// handle upgrades
 		app.loops.upgrade();
 		
