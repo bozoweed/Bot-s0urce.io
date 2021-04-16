@@ -86,7 +86,8 @@ app = {
 		}
 		if ($("#window-computer").is(":visible") === false) {
 			log("* My computer must be open");
-			$("#desktop-computer").children("img").click();
+			$("#desktop-computer").children("img").click();			
+			$(`#window-firewall-part1`).click();
 		}
 		if ($("#window-bot").is(":visible") === false) {
 			log("* Opening bot window");
@@ -296,16 +297,6 @@ app = {
 					myBT-=strengthPrice
 					log(". Buying strength");
 					$("#shop-firewall-difficulty").click();
-				}
-			}
-			// check max charges
-			if (stats.charge < maxStats.charge) {
-				log(". Charge isn't maxed");
-				const chargePrice = parseInt($("#shop-firewall-max_charge10-value").text());
-				if (chargePrice < myBT) {
-					myBT-=chargePrice
-					$("#shop-firewall-max_charge10").click();
-					log(". Buying charge");
 				}
 			}
 			// check regen
