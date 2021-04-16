@@ -15,16 +15,12 @@ let dragOffset = {
 	y: 0
 };
 let minerStatus = [
+	
 	{
-		name: "shop-basic-miner",
+		name: "shop-quantum-server",
 		value: 0
-	},
-	{
-		name: "shop-advanced-miner",
-		value: 0
-	},
-	{
-		name: "shop-mining-drill",
+	},{
+		name: "shop-bot-net",
 		value: 0
 	},
 	{
@@ -32,11 +28,15 @@ let minerStatus = [
 		value: 0
 	},
 	{
-		name: "shop-bot-net",
+		name: "shop-mining-drill",
 		value: 0
 	},
 	{
-		name: "shop-quantum-server",
+		name: "shop-advanced-miner",
+		value: 0
+	},	
+	{
+		name: "shop-basic-miner",
 		value: 0
 	}
 ];
