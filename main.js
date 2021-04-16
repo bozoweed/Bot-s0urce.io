@@ -41,7 +41,7 @@ let minerStatus = [
 	}
 ];
 let maxStats = {
-	charge: 30,
+	maxCharge: 30,
 	strength: 4,
 	regen: 10
 };
@@ -277,52 +277,65 @@ app = {
 			const firewall = app.getFirewallToUpdate()
 			log(`. Handling upgrades to firewall ${firewall}`);
 			$(`#window-firewall-part`+firewall).click();
+			setTimeout(()=>{
 
-			myBT = parseInt($("#window-my-coinamount").text());
-			// if the back button is visible, we're on a page, let's back out
-			/*if ($("#window-firewall-pagebutton").is(":visible") === true) {
-				$("#window-firewall-pagebutton").click();
-			}*/
-			// get stats
-			const stats = {
-				charge: parseInt($("#shop-max-charges").text()),
-				strength: parseInt($("#shop-strength").text()),
-				regen: parseInt($("#shop-regen").text()),
-			};
-			// start checking prices, start with strength
-			if (stats.strength < maxStats.strength) {
-				log(". Strength isn't maxed");
-				const strengthPrice = parseInt($("#shop-firewall-difficulty-value").text());
-				if (strengthPrice < myBT) {
-					myBT-=strengthPrice
-					log(". Buying strength");
-					$("#shop-firewall-difficulty").click();
+				myBT = parseInt($("#window-my-coinamount").text());
+				// if the back button is visible, we're on a page, let's back out
+				/*if ($("#window-firewall-pagebutton").is(":visible") === true) {
+					$("#window-firewall-pagebutton").click();
+				}*/
+				// get stats
+				const stats = {
+					charge: parseInt($(".firewall-part"+firewall+"-charges").text()),
+					maxCharge: parseInt($(".firewall-part"+firewall+"-charges-max").text()),
+					strength: parseInt($("#shop-strength").text()),
+					regen: parseInt($("#shop-regen").text()),
+				};
+				if(stats.charge < stats.maxCharge){
+					log(". Charge isn't maxed");
+					const chargePrice = parseInt($("#shop-firewall-charge5-value").text());
+					if (chargePrice < myBT) {
+						myBT-=chargePrice
+						log(". Buying Charge");
+						$("#shop-firewall-charge5").click();
+					}
 				}
-			}			
-			// check max charges
-			if (stats.charge < maxStats.charge) {
-				log(". Charge isn't maxed");
-				const chargePrice = parseInt($("#shop-firewall-max_charge10-value").text());
-				if (chargePrice < myBT) {
-					myBT-=chargePrice
-					$("#shop-firewall-max_charge10").click();
-					log(". Buying charge");
+				// start checking prices, start with strength
+				if (stats.strength < maxStats.strength) {
+					log(". Strength isn't maxed");
+					const strengthPrice = parseInt($("#shop-firewall-difficulty-value").text());
+					if (strengthPrice < myBT) {
+						myBT-=strengthPrice
+						log(". Buying strength");
+						$("#shop-firewall-difficulty").click();
+					}
+				}			
+				// check max charges
+				if (stats.maxCharge < maxStats.maxCharge) {
+					log(". MaxCharge isn't maxed");
+					const maxChargePrice = parseInt($("#shop-firewall-max_charge10-value").text());
+					if (maxChargePrice < myBT) {
+						myBT-=maxChargePrice
+						$("#shop-firewall-max_charge10").click();
+						log(". Buying MaxCharge");
+					}
 				}
-			}
-			// check regen
-			if (stats.regen < maxStats.regen) {
-				log(". Regen isn't maxed");
-				const regenPrice = parseInt($("#shop-firewall-regen-value").text());
-				if (regenPrice < myBT) {
-					myBT-=regenPrice
-					$("#shop-firewall-regen").click();
-					log(". Buying regen");
+				// check regen
+				if (stats.regen < maxStats.regen) {
+					log(". Regen isn't maxed");
+					const regenPrice = parseInt($("#shop-firewall-regen-value").text());
+					if (regenPrice < myBT) {
+						myBT-=regenPrice
+						$("#shop-firewall-regen").click();
+						log(". Buying regen");
+					}
 				}
-			}
-			// nothing matched, let's go back
-			if ($("#window-firewall-pagebutton").is(":visible") === true) {
-				$("#window-firewall-pagebutton").click();
-			}
+				// nothing matched, let's go back
+				if ($("#window-firewall-pagebutton").is(":visible") === true) {
+					$("#window-firewall-pagebutton").click();
+				}
+				
+			},upgradeFreq/2)
 		},
 	},
 
