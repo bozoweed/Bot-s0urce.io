@@ -291,7 +291,7 @@ app = {
 					strength: parseInt($("#shop-strength").text()),
 					regen: parseInt($("#shop-regen").text()),
 				};
-				if(stats.charge < stats.maxCharge){
+				if(stats.charge < stats.maxCharge-5){
 					log(". Charge isn't maxed");
 					const chargePrice = parseInt($("#shop-firewall-charge5-value").text());
 					if (chargePrice < myBT) {
