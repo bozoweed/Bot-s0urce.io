@@ -1,6 +1,14 @@
 # Bot-s0urce.io
 A bot to automatically play s0urce.io for you
 
+## Features
+- auto buy miner
+- auto upgrade firewall
+- auto target 
+- auto recharge firewall
+- gui interface
+
+
 ## Configuration
 
 The main file (`main.js`) contains several values you may want to change.
