@@ -204,7 +204,7 @@ app = {
 			});
 
 			$("#hack-speed-input-max").change(() => {
-				setTimeout(()=>wordFreqMax = parseInt($("#hack-speed-input-min").val()), 1000)	
+				setTimeout(()=>wordFreqMax = parseInt($("#hack-speed-input-max").val()), 1000)	
 			});
             //make the bot window draggable
             botWindow = ("#window-bot");
