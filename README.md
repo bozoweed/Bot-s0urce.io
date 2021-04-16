@@ -5,7 +5,7 @@ A bot to automatically play s0urce.io for you
 - auto buy miner
 - auto upgrade firewall
 - auto target 
-- auto recharge firewall
+- auto reload firewall charge
 - gui interface
 
 
