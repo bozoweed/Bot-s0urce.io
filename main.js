@@ -87,6 +87,7 @@ app = {
 		if ($("#window-computer").is(":visible") === false) {
 			log("* My computer must be open");
 			$("#desktop-computer").children("img").click();		
+			$(`#window-firewall-part1`).click();
 		}
 		if ($("#window-bot").is(":visible") === false) {
 			log("* Opening bot window");
