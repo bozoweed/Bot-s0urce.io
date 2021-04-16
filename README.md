@@ -8,7 +8,8 @@ The main file (`main.js`) contains several values you may want to change.
 * `ocrApiKey` - The key for the ocr.space API (it's free)
 * `db` - The path to the training JSON
 * `message` - The message you send to people after you hack them
-* `wordFreqmod` - How often to guess words.  If you guess too fast, you'll be booted from the game and your progress will no longer update. ( change at line 45 and 98 )
+* `wordFreqMin` - How often to guess words minimum.  If you guess too fast, you'll be booted from the game and your progress will no longer update. ( change at line 45 and 98 )
+* `wordFreqMax` - How often to guess words maximu.
 * `mineFreq` - How often to purchase upgrades for BT miner.
 * `upgradeFreq` - How often to purchase upgrades for Firewall. ( Not work for now need to work on it )
 * `minerLevel` - How high you get your miners to before moving to the next level up.
