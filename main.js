@@ -60,7 +60,7 @@ let minerLevel = 5000;
 let lastFirewallUpdated=0;
 
 let playerToAttack = 0;
-
+let randomPlayer = true
 app = {
 	start: () => {
 		$.get(db).done((data) => {
@@ -94,6 +94,8 @@ app = {
 			app.gui();
 		}
 		isAutomated = true;
+		if(randomPlayer)
+			playerToAttack = app.getRandomArbitrary(0, 10);
 		// start by getting the first target in the list
 		const targetName = $("#player-list").children("tr").eq(playerToAttack)[0].innerText;
 		log(`. Now attacking ${targetName}`);
@@ -113,7 +115,7 @@ app = {
 		// handle upgrades
 		//app.loops.upgrade();
 		
-		
+		console.clear();
 		wordFreq = app.getRandomArbitrary(wordFreqMin, wordFreqMax);
 		// start the loop that does the guessing
 		wordLoop = setInterval(app.loops.word, wordFreq);
