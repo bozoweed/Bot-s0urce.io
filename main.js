@@ -64,7 +64,7 @@ let randomPlayer = true
 app = {
 	start: () => {
 		$.get(db).done((data) => {
-			//listing = JSON.parse(data);
+			listing = JSON.parse(data);
 			app.automate();
 		});
 	},
