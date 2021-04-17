@@ -46,7 +46,7 @@ let maxStats = {
 	regen: 10
 };
 const firewalls = ["1", "2", "3"];
-const ocrApiKey = "c57268592788957";
+const ocrApiKey = "XXX";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
 let message = "We Are Anonymous, Expect Us !";
 let wordFreqMin = 900
