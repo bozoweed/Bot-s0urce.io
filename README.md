@@ -14,7 +14,7 @@ A bot to automatically play s0urce.io for you
 The main file (`main.js`) contains several values you may want to change.
 
 * `ocrApiKey` - The key for the ocr.space API (it's free)
-* `db` - The path to the training JSON
+* `db` - The path to the training JSON ( need to be update if bot not work)
 * `message` - The message you send to people after you hack them
 * `wordFreqMin` - How often to guess words minimum.  If you guess too fast, you'll be booted from the game and your progress will no longer update. ( change at line 45 and 98 )
 * `wordFreqMax` - How often to guess words maximu.

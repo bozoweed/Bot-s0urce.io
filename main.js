@@ -1,5 +1,5 @@
 let app;
-let listing = null;
+let listing = [];
 let isAutomated = false;
 let block = false;
 let waiting = false;
@@ -46,7 +46,7 @@ let maxStats = {
 	regen: 10
 };
 const firewalls = ["1", "2", "3"];
-const ocrApiKey = "XXX";
+const ocrApiKey = "c57268592788957";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
 let message = "We Are Anonymous, Expect Us !";
 let wordFreqMin = 900
@@ -64,7 +64,7 @@ let randomPlayer = true
 app = {
 	start: () => {
 		$.get(db).done((data) => {
-			listing = JSON.parse(data);
+			//listing = JSON.parse(data);
 			app.automate();
 		});
 	},
@@ -372,24 +372,24 @@ app = {
 	go: () => {
 		const wordLink = $(".tool-type-img").prop("src");
 		if ( wordLink !== "http://s0urce.io/client/img/words/template.png" ) {
-		if (wordLink !== "http://www.s0urce.io/client/img/words/template.png" ) {
-			if (listing.hasOwnProperty(wordLink) === true) {
-				const word = listing[wordLink];
-				log(`. Found word: [${word}]`);
-				log(`. Freq: [${wordFreq}]`);
-				app.submit(word);
-				return;
+			if (wordLink !== "http://www.s0urce.io/client/img/words/template.png" ) {
+				if (listing.hasOwnProperty(wordLink) === true) {
+					const word = listing[wordLink];
+					log(`. Found word: [${word}]`);
+					log(`. Freq: [${wordFreq}]`);
+					app.submit(word);
+					return;
+				}
+				log(`. Found word: [${wordLink}]`);
+				
+				log(`.[${listing[wordLink]}]`);
+				log("* Not seen, trying OCR...");
+				app.ocr(wordLink);
 			}
-			log(`. Found word: [${wordLink}]`);
-			
-			log(`.[${listing[wordLink]}]`);
-			log("* Not seen, trying OCR...");
-			app.ocr(wordLink);
-		}
-		else {
-			log("* Can't find the word link...");
-			app.restart();	
-		}
+			else {
+				log("* Can't find the word link...");
+				app.restart();	
+			}
 		}
 		else {
 			log("* Can't find the word link...");
@@ -415,6 +415,7 @@ app = {
 			language: "eng",
 			url: url
 		}).done((data) => {
+			console.log(data)
 			const word = String(data["ParsedResults"][0]["ParsedText"]).trim().toLowerCase().split(" ").join("");
 			if (word.length > 2) {
 				log(`. Got data: [${word}]`);
