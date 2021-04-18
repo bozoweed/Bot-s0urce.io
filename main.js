@@ -105,7 +105,6 @@ function loadListing(data){
 	return new Promise(async (cb, fa)=>{
 		console.log(data)
 		let Json_o = JSON.parse(data)
-		console.log(Json_o)
 		let info = Json_o.link;
 		let md5info = Json_o.md5;
 		for(const[key, link] of Object.entries(info)){
