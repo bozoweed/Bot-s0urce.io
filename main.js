@@ -56,7 +56,7 @@ let mineFreq = 3000;
 let blockFreq = 1000;
 let upgradeFreq = 1000;
 let minerLevel = 5000;
-
+let failattempt = 0;
 let lastFirewallUpdated=0;
 
 let playerToAttack = 0;
@@ -316,11 +316,20 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 						// check to see if it's new
 						if (hackProgress === newHackProgress) {
 							// the bar hasn't moved
+							if(failattempt < 5)
+							{
+								failattempt ++;
+								app.go();
+								return
+							}
 							block = true;
 							GetListing().then(()=>{	
-								
+								failattempt = 0;
+								hackProgress = -1;
 								block = false;
-								waiting = false;
+								//app.restart();
+								waiting = true;
+								app.go();
 							})
 							//app.restart();	//restart if not work
 							return;
@@ -449,6 +458,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 					if (wordLink !== "http://www.s0urce.io/client/img/words/template.png" ) {
 						if (listing.hasOwnProperty(wordLink) === true) {
 							const word = listing[wordLink];
+							lastetry = word
 							log(`. Found word: [${word}]`);
 							log(`. Freq: [${wordFreq}]`);
 							app.submit(word);
@@ -457,8 +467,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 						log(`. Found word: [${wordLink}]`);
 						
 						log(`.[${listing[wordLink]}]`);
-						log("* Not seen, trying OCR...");
-						app.ocr(wordLink);
+						//app.ocr(wordLink);
 					}
 					else {
 						log("* Can't find the word link...");
