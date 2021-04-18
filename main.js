@@ -110,6 +110,7 @@ function loadListing(data){
 		for(const[key, link] of Object.entries(info)){
 			let base64 = await readImage(link)
 			listing[link] = md5info[CryptoJS.MD5( base64).toString()]
+			console.log(link +" | "+listing[link])
 		}
 		
 		console.log(JSON.stringify(listing))
@@ -315,7 +316,12 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 						// check to see if it's new
 						if (hackProgress === newHackProgress) {
 							// the bar hasn't moved
-							app.restart();	//restart if not work
+							block = true;
+							GetListing().then(()=>{	
+								
+							block = false;
+							})
+							//app.restart();	//restart if not work
 							return;
 						} else {
 							// the bar has moved
