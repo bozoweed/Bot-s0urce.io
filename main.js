@@ -319,7 +319,8 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 							block = true;
 							GetListing().then(()=>{	
 								
-							block = false;
+								block = false;
+								waiting = false;
 							})
 							//app.restart();	//restart if not work
 							return;
