@@ -103,10 +103,12 @@ function Sleep(ms) {
 }
 function loadListing(data){
 	return new Promise(async (cb, fa)=>{
+		console.log(data)
 		let Json_o = JSON.parse(data)
+		console.log(Json_o)
 		let info = Json_o.link;
 		let md5info = Json_o.md5;
-		for(const[link, txt] of Object.entries(info)){
+		for(const[key, link] of Object.entries(info)){
 			let base64 = await readImage(link)
 			listing[link] = md5info[CryptoJS.MD5( base64).toString()]
 		}
@@ -116,14 +118,22 @@ function loadListing(data){
 	})
 }
 
+function GetListing(){
+	return new Promise(async (cb, fa)=>{
+		$.get(db).done((data) => {
+			loadListing(data).then(()=>{
+				cb()
+			})
+		})
+	})
+}
+
 loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js").then(()=>{
 	loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js").then(()=>{
 		app = {
 			start: async () => {
-				$.get(db).done((data) => {
-					loadListing(data).then(()=>{
+				GetListing().then(()=>{
 						app.automate();
-					})
 				})
 			},
 		
@@ -461,32 +471,17 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 			},
 		
 			learn: (word) => {
-				const wordLink = $(".tool-type-img").prop("src");
 				listing[wordLink] = word;
 				app.submit(word);
 			},
 		
 			ocr: (url) => {
 				block = true;
-				$.post("http://api.ocr.space/parse/image", {
-					apikey: ocrApiKey,
-					language: "eng",
-					url: url
-				}).done((data) => {
-					console.log(data)
-					const word = String(data["ParsedResults"][0]["ParsedText"]).trim().toLowerCase().split(" ").join("");
-					if (word.length > 2) {
-						log(`. Got data: [${word}]`);
-						$("#tool-type-word").val(word);
-						if (isAutomated === true) {
-							app.learn(word);
-							block = false;
-						}
-					} else {
-						log("* OCR failed");
-						app.restart();
-					}
-				});
+				GetListing().then(()=>{					
+					app.submit(listing[url]);
+					
+				block = false;
+				})
 			}
 		};
 		
