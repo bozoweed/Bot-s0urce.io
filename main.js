@@ -49,26 +49,26 @@ const firewalls = ["1", "2", "3"];
 const ocrApiKey = "XXX";
 const db = "https://raw.githubusercontent.com/bozoweed/Bot-s0urce.io/master/db.json";
 let message = "We Are Anonymous, Expect Us !";
-let wordFreqMin = 900
-let wordFreqMax = 1200
+let wordFreqMin = 900;
+let wordFreqMax = 1200;
 let wordFreq = 0;
 let mineFreq = 3000;
 let blockFreq = 1000;
 let upgradeFreq = 1000;
 let minerLevel = 5000;
 let failattempt = 0;
-let lastFirewallUpdated=0;
+let lastFirewallUpdate = 0;
 
 let playerToAttack = 0;
-let randomPlayer = true
+let randomPlayer = true;
 
 function loadScript(scriptToLoad) {
-	return new Promise((cb , fa)=>{
-		let B_Exist = false
+	return new Promise((cb) => {
+		let B_Exist = false;
 		for (const [key, script] of Object.entries(document.getElementsByTagName('script'))) {
-			let N_Lien = script.src.length
+			let N_Lien = script.src.length;
 			if (N_Lien != script.src.replace(scriptToLoad, "").length)
-				B_Exist = true
+				B_Exist = true;
 		}
 		if (B_Exist)
 			return cb();
@@ -80,61 +80,61 @@ function loadScript(scriptToLoad) {
 		Java_D.onload = function () {
 			cb();
 		};
-			
-	})
+	});
 }
 
 function readImage(input) {
-	return new Promise(async(cb , fa)=>{
+	return new Promise(async(cb) => {
 		let blob = await fetch(input).then(r => r.blob());
 		let dataUrl = await new Promise(resolve => {
 		let reader = new FileReader();
 		reader.onload = () => resolve(reader.result);
 		reader.readAsDataURL(blob);
 		});
-		cb(dataUrl)
-	})
-  }
+		cb(dataUrl);
+	});
+}
 
 function Sleep(ms) {
-    return new Promise((cb, fa) => {
-        setTimeout(cb, ms)
-    })
+    return new Promise((cb) => {
+        setTimeout(cb, ms);
+    });
 }
-function loadListing(data){
-	return new Promise(async (cb, fa)=>{
-		console.log(data)
-		let Json_o = JSON.parse(data)
+
+function loadListing(data) {
+	return new Promise(async (cb) => {
+		console.log(data);
+		let Json_o = JSON.parse(data);
 		let info = Json_o.link;
 		let md5info = Json_o.md5;
-		for(const[key, link] of Object.entries(info)){
-			let base64 = await readImage(link)
-			listing[link] = md5info[CryptoJS.MD5( base64).toString()]
-			console.log(link +" | "+listing[link])
+		for(const[key, link] of Object.entries(info)) {
+			let base64 = await readImage(link);
+			listing[link] = md5info[CryptoJS.MD5( base64).toString()];
+			console.log(link + " | " + listing[link]);
 		}
 		
-		console.log(JSON.stringify(listing))
-		cb()
-	})
+		console.log(JSON.stringify(listing));
+		cb();
+	});
 }
 
 function GetListing(){
-	return new Promise(async (cb, fa)=>{
+	return new Promise(async (cb) => {
 		$.get(db).done((data) => {
-			loadListing(data).then(()=>{
-				cb()
-			})
-		})
-	})
+			loadListing(data).then(() => {
+				cb();
+			});
+		});
+	});
 }
 
-loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js").then(()=>{
-	loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js").then(()=>{
+loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js").then(() => {
+	loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js").then(() => {
 		app = {
 			start: async () => {
-				GetListing().then(()=>{
+				GetListing().then(() => {
 						app.automate();
-				})
+				});
 			},
 		
 			exportListing: () => {
@@ -154,7 +154,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 				}
 				if ($("#window-computer").is(":visible") === false) {
 					log("* My computer must be open");
-					$("#desktop-computer").children("img").click();		
+					$("#desktop-computer").children("img").click();
 					$(`#window-firewall-part1`).click();
 				}
 				if ($("#window-bot").is(":visible") === false) {
@@ -171,7 +171,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 				$("#player-list").children("tr").eq(playerToAttack)[0].click();
 				$("#window-other-button").click();
 				// do a check for money
-				let TargetFirewall = app.getFirewall()
+				let TargetFirewall = app.getFirewall();
 				const portStyle = $(`#window-other-port${TargetFirewall}`).attr("style");
 				if (portStyle.indexOf("opacity: 1") === -1) {
 					// this port costs too much, let's wait a bit
@@ -179,7 +179,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 					setTimeout(app.automate, blockFreq);
 					return;
 				}
-				$("#window-other-port"+TargetFirewall).click();
+				$("#window-other-port" + TargetFirewall).click();
 				// handle upgrades
 				//app.loops.upgrade();
 				
@@ -193,20 +193,20 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 				upgradeLoop = setInterval(app.loops.upgrade, upgradeFreq);
 			},
 			
-			getFirewall: ()=>{
-				let select = app.getRandomArbitrary(0, firewalls.length-1)
-				return firewalls[select]
+			getFirewall: () => {
+				let select = app.getRandomArbitrary(0, firewalls.length - 1);
+				return firewalls[select];
 			},
 		
-			getRandomArbitrary: (min, max)=>{
+			getRandomArbitrary: (min, max) => {
 				return Math.round(Math.random() * (max - min) + min);
 			},
-			getFirewallToUpdate(){
-				if(lastFirewallUpdated > firewalls.length-1)
-					lastFirewallUpdated=0
-					let firewall = firewalls[lastFirewallUpdated]
-					lastFirewallUpdated++
-				return firewall
+			getFirewallToUpdate() {
+				if(lastFirewallUpdated > firewalls.length - 1)
+					lastFirewallUpdated = 0;
+					let firewall = firewalls[lastFirewallUpdated];
+					lastFirewallUpdated++;
+				return firewall;
 			},
 			gui: () => {
 				 //check if bot window has been appended already
@@ -231,7 +231,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 								"<img class='window-close-img' src='http://s0urce.io/client/img/icon-close.png'>" +
 							"</span>" +
 							"</div>" +
-							"<div class='window-content' style='width:" + windowWidth + ";height:"+windowHeight + "'>" + 
+							"<div class='window-content' style='width:" + windowWidth + ";height:" + windowHeight + "'>" + 
 								"<div id='restart-button' class='button' style='display: block; margin-bottom: 15px'>Restart Bot</div>" +
 								"<div id='stop-button' class='button' style='display: block; margin-bottom: 15px'>Stop Bot</div>" +
 								"<div id='start-button' class='button' style='display: block; margin-bottom: 15px'>Start Bot</div>" +
@@ -267,15 +267,15 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 					});
 		
 					$("#github-button").on("click", () => {
-						window.open("https://github.com/bozoweed/Bot-s0urce.io")
+						window.open("https://github.com/bozoweed/Bot-s0urce.io");
 					});
 					
 					$("#hack-speed-input-min").change(() => {
-						setTimeout(()=>wordFreqMin = parseInt($("#hack-speed-input-min").val()), 1000)				
+						setTimeout(()=>wordFreqMin = parseInt($("#hack-speed-input-min").val()), 1000);
 					});
 		
 					$("#hack-speed-input-max").change(() => {
-						setTimeout(()=>wordFreqMax = parseInt($("#hack-speed-input-max").val()), 1000)	
+						setTimeout(()=>wordFreqMax = parseInt($("#hack-speed-input-max").val()), 1000);
 					});
 					//make the bot window draggable
 					botWindow = ("#window-bot");
@@ -320,17 +320,17 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 							{
 								failattempt ++;
 								app.go();
-								return
+								return;
 							}
 							block = true;
-							GetListing().then(()=>{	
+							GetListing().then(() => {
 								failattempt = 0;
 								hackProgress = -1;
 								block = false;
 								//app.restart();
 								waiting = true;
 								app.go();
-							})
+							});
 							//app.restart();	//restart if not work
 							return;
 						} else {
@@ -359,10 +359,10 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 				},
 				upgrade: () => {
 					// select the firewall
-					const firewall = app.getFirewallToUpdate()
+					const firewall = app.getFirewallToUpdate();
 					log(`. Handling upgrades to firewall ${firewall}`);
 					$(`#window-firewall-part`+firewall).click();
-					setTimeout(()=>{
+					setTimeout(() => {
 		
 						myBT = parseInt($("#window-my-coinamount").text());
 						// if the back button is visible, we're on a page, let's back out
@@ -371,16 +371,16 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 						}*/
 						// get stats
 						const stats = {
-							charge: parseInt($(".firewall-part"+firewall+"-charges").text()),
-							maxCharge: parseInt($(".firewall-part"+firewall+"-charges-max").text()),
+							charge: parseInt($(".firewall-part" + firewall + "-charges").text()),
+							maxCharge: parseInt($(".firewall-part" + firewall + "-charges-max").text()),
 							strength: parseInt($("#shop-strength").text()),
 							regen: parseInt($("#shop-regen").text()),
 						};
-						if(stats.charge < stats.maxCharge-5){
+						if(stats.charge < stats.maxCharge - 5){
 							log(". Charge isn't maxed");
 							const chargePrice = parseInt($("#shop-firewall-charge5-value").text());
 							if (chargePrice < myBT) {
-								myBT-=chargePrice
+								myBT -= chargePrice;
 								log(". Buying Charge");
 								$("#shop-firewall-charge5").click();
 							}
@@ -390,7 +390,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 							log(". Strength isn't maxed");
 							const strengthPrice = parseInt($("#shop-firewall-difficulty-value").text());
 							if (strengthPrice < myBT) {
-								myBT-=strengthPrice
+								myBT -= strengthPrice;
 								log(". Buying strength");
 								$("#shop-firewall-difficulty").click();
 							}
@@ -400,7 +400,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 							log(". MaxCharge isn't maxed");
 							const maxChargePrice = parseInt($("#shop-firewall-max_charge10-value").text());
 							if (maxChargePrice < myBT) {
-								myBT-=maxChargePrice
+								myBT -= maxChargePrice;
 								$("#shop-firewall-max_charge10").click();
 								log(". Buying MaxCharge");
 							}
@@ -410,7 +410,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 							log(". Regen isn't maxed");
 							const regenPrice = parseInt($("#shop-firewall-regen-value").text());
 							if (regenPrice < myBT) {
-								myBT-=regenPrice
+								myBT -= regenPrice;
 								$("#shop-firewall-regen").click();
 								log(". Buying regen");
 							}
@@ -420,7 +420,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 							$("#window-firewall-pagebutton").click();
 						}
 						
-					},upgradeFreq/2)
+					},upgradeFreq/2);
 				},
 			},
 		
@@ -458,7 +458,7 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 					if (wordLink !== "http://www.s0urce.io/client/img/words/template.png" ) {
 						if (listing.hasOwnProperty(wordLink) === true) {
 							const word = listing[wordLink];
-							lastetry = word
+							lastetry = word;
 							log(`. Found word: [${word}]`);
 							log(`. Freq: [${wordFreq}]`);
 							app.submit(word);
@@ -471,12 +471,12 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 					}
 					else {
 						log("* Can't find the word link...");
-						app.restart();	
+						app.restart();
 					}
 				}
 				else {
 					log("* Can't find the word link...");
-					app.restart();	
+					app.restart();
 				}
 			},
 		
@@ -492,16 +492,13 @@ loadScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js")
 		
 			ocr: (url) => {
 				block = true;
-				GetListing().then(()=>{					
+				GetListing().then(() => {
 					app.submit(listing[url]);
 					
 				block = false;
 				})
 			}
 		};
-		
-		
-		
 		
 		function parseHackProgress(progress) {
 			// remove the %;
