@@ -57,7 +57,7 @@ let blockFreq = 1000;
 let upgradeFreq = 1000;
 let minerLevel = 5000;
 let failattempt = 0;
-let lastFirewallUpdate = 0;
+let lastFirewallUpdated = 0;
 
 let playerToAttack = 0;
 let randomPlayer = true;
