@@ -1,3 +1,24 @@
+## Project Update
+
+### ⚠️ Project Status: Deprecated (As of November 2023)
+
+This project is no longer actively maintained as of November 2023. The focus has shifted towards developing a fully functional, advanced smart bot, which includes both a free plan and a monthly subscription option.
+
+### What’s Next?
+
+Stay tuned! We’re working hard on our Bot v2, which is designed to bring an enhanced experience with more features and improved usability. An update to this README will be released soon to provide all the necessary details on how to make the most of our new bot. No specific ETA, but expect it very soon!
+
+
+
+
+
+
+
+
+
+
+
+
 # Bot-s0urce.io
 A bot to automatically play s0urce.io for you
 
